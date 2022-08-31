@@ -1,0 +1,16 @@
+Lesson 7
+Hello there. This is fastai lesson 7.
+This lesson is more advanced compared to previous lessons and it includes things like normalization and many papers. 
+Imagenette:
+Imagenette is a subset of ImageNet. Imagenette takes less time to learn due to having less images while also the model gets about the same accuracy as if it was training on ImageNet despite the time difference.
+Normalization:
+Getting same value goal. Let’s say that we have two datasets, in one the average of the dataset was 0 while in the second one 0 was the maximum value. If first to second than model not going to learn because already at 0, the goal. Normalization makes the average 0 with one standard deviation. This is so that the model knows what it should aim for.
+Progressive resizing:
+Start with small images and move on to bigger ones. 2 reasons why work, first the images are smaller so it takes less time to train on them but the model is still learning the same parameters as those it will be tested on during the validation test. This is also a type of data augmentation since the images are changing. Could be damaging when transfer learning if images are similar due to not much change to the weights needed and they need big change when training on smaller images.
+TTA:
+One common method used is center cropping. While center cropping can improve accuracy it can also miss important details in an image. For example, if we have a bird image one of its characteristic feathers might be cropped out and we will get worse accuracy as a result. TTA attempts to solve this by taking different parts of the image during the validation test and turns those parts into new images that goes through the model and the average or max is taken. This will however make the inference stage take longer, 5 more images created means 5 times the inference time.
+Mixup:
+When we train our models we need data. The problem with that is that data is finite and there often isn’t enough. We can use various methods of data augmentation in order to fix that problem. Works by initializing random weight and multiplying dependent and independent variables with it(same weight). The result will be a new image/label that is a combination of 2 prior images. This will make the image rather blurry which will make it harder for the model to detect its contents. Around 80 iterations appears to be the sweet spot, less and it won’t be worth it to implement mixup.
+Label smoothing:
+Normally the model returns either a 1 or a 0 depending on if that label is correct or not. What if there’s multiple labels? The model is rarely going to be sure that something is inside a image so wouldn’t it make sense to have values between 1 and 0? The labels could also be wrong so even if it was perfect it could still produce the wrong result. The solution is called label smoothing and allows us to return values slightly above 0 and slightly below 1.
+
